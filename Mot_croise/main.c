@@ -1,17 +1,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <header.h>
+#include "header.h"
 
 int main() {
 
-    char x;
+    etat etat_jeux = MENU; 
+    int selection_menu;
+    //while (etat_jeux == MENU) {
 
-    printf("Les mots sont croisée, appuie sur x pour les décroiser");
-    scanf("%c", x);
-    if (x = 'x') {
-        printf("Les mots ne sont plus croisées");
-    }
+
 
     return 0;
 }

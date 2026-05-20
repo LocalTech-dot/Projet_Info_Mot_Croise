@@ -4,4 +4,5 @@ project(Mot_croise C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(Mot_croise main.c
-        header.h)
+        header.h
+        moteur.c)
