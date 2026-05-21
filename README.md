@@ -1,3 +1,3 @@
 Avancement du projet :
-Création du menu et de la fonction d'affichage du menu, il faut juste régler le problème sur la sélection Y or N pour quitter le jeux,
-faire gaffe aussi à l'état du jeux qui pour l'instant est un peu à cheval, mi géré par le main et l'autre moitié par la fonction.
+
+Fin de création du menu, deux fonction créer dans le moteur : une pour afficher le menu une autre pour quitter le jeux, pourl'instant le menu renvoie sois PARTIE sois SCORE, il faut maintenant programmer le moteur du mot mele qui sera executé lorsque le main renverra PARTIE
