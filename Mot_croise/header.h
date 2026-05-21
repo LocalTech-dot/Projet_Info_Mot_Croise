@@ -7,4 +7,7 @@ typedef enum {
     SCORE
 } etat;
 
+etat affichage_menu(void);
+etat quitter_menu(void);
+
 #endif //MOT_CROISE_HEADER_H

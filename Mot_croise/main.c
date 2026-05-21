@@ -5,9 +5,10 @@
 
 int main() {
 
-    etat etat_jeux = MENU; 
-    int selection_menu;
-    //while (etat_jeux == MENU) {
+    etat etat_jeux = MENU;
+    do {
+        etat_jeux = affichage_menu();
+    }while (etat_jeux == MENU);
 
 
 
