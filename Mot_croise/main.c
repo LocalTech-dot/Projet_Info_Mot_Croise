@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include <stdio.h>
-
 #include "header.h"
 
 int main() {
@@ -9,7 +8,6 @@ int main() {
     do {
         etat_jeux = affichage_menu();
     }while (etat_jeux == MENU);
-
 
 
     return 0;

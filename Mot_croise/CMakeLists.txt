@@ -7,4 +7,6 @@ add_executable(Mot_croise main.c
         header.h
         moteur.c
         grille.h
-        grille.c)
+        grille.c
+        dictionnaire.c
+        dictionnaire.h)

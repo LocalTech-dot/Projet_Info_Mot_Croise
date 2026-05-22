@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "header.h"
 #include "grille.h"
+#include "dictionnaire.h"
 
 etat affichage_menu() {
     int selection_menu;

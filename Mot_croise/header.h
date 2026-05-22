@@ -1,5 +1,7 @@
 #ifndef MOT_CROISE_HEADER_H
 #define MOT_CROISE_HEADER_H
+#define MAX_MOTS 15
+#define MAX_LONGUEUR 17
 
 typedef enum {
     MENU,
@@ -11,6 +13,11 @@ typedef struct {
     int nb_lignes;
     int nb_colonnes;
 } size;
+
+typedef struct {
+    char liste_mots[MAX_MOTS][MAX_LONGUEUR];
+    int nb_mots;
+}
 
 etat affichage_menu();
 etat quitter_menu();
