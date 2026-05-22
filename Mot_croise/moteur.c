@@ -41,12 +41,12 @@ etat quitter_menu() {
         printf("Etes vous sur de vouloir quitter notre super Jeux ? Y/N : ");
         scanf(" %c", &rep_quit);
 
-        if (rep_quit == 'Y') {
+        if (rep_quit == 'Y' || rep_quit == 'y') {
             exit(0);
         }
-        if (rep_quit == 'N') {
+        if (rep_quit == 'N' || rep_quit == 'n') {
             return MENU;
         }
-    } while (rep_quit != 'Y' && rep_quit != 'N');
+    } while (rep_quit != 'Y' && rep_quit != 'y' && rep_quit != 'n' && rep_quit != 'N');
     return MENU;
 }
