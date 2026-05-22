@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "header.h"
+#include "grille.h"
 
 etat affichage_menu() {
     int selection_menu;
@@ -73,6 +74,8 @@ size ask_size() {
 
 void affichage_grille() {
     char resp;
+    char plateau_de_jeu[16][16];
+
     size dim;
 
     do {
@@ -88,6 +91,10 @@ void affichage_grille() {
         } while (resp != 'Y' && resp != 'y' && resp != 'N' && resp != 'n');
 
     } while (resp == 'N' || resp == 'n');
+
+    size dim_plateau = ask_size();
+
+    initialiser_grille(dim_plateau.nb_lignes, dim_plateau.nb_colonnes, plateau_de_jeu);
 
 
 }
