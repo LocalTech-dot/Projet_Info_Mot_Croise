@@ -1,3 +1,7 @@
 Avancement du projet :
 
-Création de deux fonction ask_size et affichage-grille, normalement ask_size est fini, elle demande à l'utilisateur un nombre de lignes et un nombre de colonnes et le stocke dans une structure nommé size, une boucle à également été créer pour valider la taille voulu par l'utilisateur afin que si il n'est pas satifsait de la taille  il puisse la re saisir, il faut mainteant passer à la lecture du dico.txt qui à également été ajouté pour selectionner des mots d'une certaines tailles etc...
+Création de deux partie :
+
+Partie Grille : Je laisse max nous en dire plus :)
+
+Partie Dico : La meilleur partie évidememnt ducoup on a pour l'instant une fonction dans dictionnaire.h qui calcul le nombre de mot maximum en fonction du nombre de lignes et de colonnes choisi par l'utilisateur et le début de la fonction recherche, il faut coder cette fonction pour qu'elle ignore les mots avec des espaces, à chaque fois qu'elle détecte un espace elle passe à la ligne suivante.
