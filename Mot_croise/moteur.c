@@ -50,3 +50,44 @@ etat quitter_menu() {
     } while (rep_quit != 'Y' && rep_quit != 'y' && rep_quit != 'n' && rep_quit != 'N');
     return MENU;
 }
+
+size ask_size() {
+    size dim;
+
+    do {
+        printf("Veuillez entrer le nombres de lignes de votre grilles\n");
+        printf("-------------Nombre attendu entre 8 et 16------------\n");
+        scanf("%d", &dim.nb_lignes);
+        printf("Veuillez entrer le nombres de colonnes de votre grilles\n");
+        printf("-------------Nombre attendu entre 8 et 16------------\n");
+        scanf("%d", &dim.nb_colonnes);
+
+        if (dim.nb_lignes < 8 || dim.nb_colonnes < 8  || dim.nb_colonnes > 16 || dim.nb_lignes > 16) {
+            printf("Erreur, veuillez bien lire la consigne");
+        }
+
+    }while (dim.nb_lignes < 8 || dim.nb_colonnes < 8  || dim.nb_colonnes > 16 || dim.nb_lignes > 16);
+
+    return dim;
+}
+
+void affichage_grille() {
+    char resp;
+    size dim;
+
+    do {
+        dim = ask_size();
+
+        do {
+            printf("Vous avez choisi de jouer dans une grille de taille %d*%d. Voulez-vous continuer ? Y/N : ", dim.nb_lignes, dim.nb_colonnes);
+            scanf(" %c", &resp);
+
+            if (resp != 'Y' && resp != 'y' && resp != 'N' && resp != 'n') {
+                printf("Erreur de saisie. Veuillez repondre par Y ou N.\n");
+            }
+        } while (resp != 'Y' && resp != 'y' && resp != 'N' && resp != 'n');
+
+    } while (resp == 'N' || resp == 'n');
+
+
+}
