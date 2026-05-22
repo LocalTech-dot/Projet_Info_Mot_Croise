@@ -8,8 +8,8 @@ typedef enum {
 } etat;
 
 typedef struct {
-    nb_lignes;
-    nb_colonnes;
+    int nb_lignes;
+    int nb_colonnes;
 } size;
 
 etat affichage_menu();
