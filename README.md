@@ -1,3 +1,3 @@
 Avancement du projet :
 
-Fin de création du menu, deux fonction créer dans le moteur : une pour afficher le menu une autre pour quitter le jeux, pourl'instant le menu renvoie sois PARTIE sois SCORE, il faut maintenant programmer le moteur du mot mele qui sera executé lorsque le main renverra PARTIE
+Création de deux fonction ask_size et affichage-grille, normalement ask_size est fini, elle demande à l'utilisateur un nombre de lignes et un nombre de colonnes et le stocke dans une structure nommé size, une boucle à également été créer pour valider la taille voulu par l'utilisateur afin que si il n'est pas satifsait de la taille  il puisse la re saisir, il faut mainteant passer à la lecture du dico.txt qui à également été ajouté pour selectionner des mots d'une certaines tailles etc...
