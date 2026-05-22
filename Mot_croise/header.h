@@ -7,7 +7,14 @@ typedef enum {
     SCORE
 } etat;
 
-etat affichage_menu(void);
-etat quitter_menu(void);
+typedef struct {
+    nb_lignes;
+    nb_colonnes;
+} size;
+
+etat affichage_menu();
+etat quitter_menu();
+size ask_size();
+void affichage_grille();
 
 #endif //MOT_CROISE_HEADER_H
