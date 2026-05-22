@@ -5,9 +5,11 @@
 #ifndef MOT_CROISE_GRILLE_H
 #define MOT_CROISE_GRILLE_H
 
+#include "header.h"
+
 // A savoir: g...grille    r....lignes  c....collones   car....caractere
 
-grille *grille_crée(int lignes, int colns);
+Grille *grille_cree(int lignes, int cols);
 
 void grille_liberer(Grille *g);
 
