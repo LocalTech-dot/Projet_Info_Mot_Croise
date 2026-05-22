@@ -19,7 +19,7 @@ etat affichage_menu() {
 
         if (selection_menu < 1 || selection_menu > 3) {
             printf("\n---------------------------------------------\n");
-            printf("Erreur, Veuillez lire la consigne\n");
+            printf("Erreur, Veuillez lire la consigne, vai tomar no cu lucien do caralho\n");
             printf("---------------------------------------------\n\n");
         }
 
