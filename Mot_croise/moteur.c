@@ -93,9 +93,8 @@ void affichage_grille() {
 
     } while (resp == 'N' || resp == 'n');
 
-    size dim_plateau = ask_size();
-
-    initialiser_grille(dim_plateau.nb_lignes, dim_plateau.nb_colonnes, plateau_de_jeu);
+    initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
 
 }
+

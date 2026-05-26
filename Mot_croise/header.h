@@ -15,7 +15,7 @@ typedef struct {
 } size;
 
 typedef struct {
-    char liste_mots[MAX_MOTS][MAX_LONGUEUR];
+    char mots_choisie[MAX_MOTS][MAX_LONGUEUR];
     int nb_mots;
 }liste_mots;
 
