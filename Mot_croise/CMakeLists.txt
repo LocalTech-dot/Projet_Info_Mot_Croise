@@ -6,7 +6,7 @@ set(CMAKE_C_STANDARD 99)
 add_executable(Mot_croise main.c
         header.h
         moteur.c
-        plateau.h
-        plateau.c
+        grille.h
+        grille.c
         dictionnaire.c
         dictionnaire.h)

@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "plateau.h"
+#include "grille.h"
 #include "header.h"
 #include <stdbool.h>
 
-void initialiser_plateau(int lignes, int colonnes, char grille[16][16]) {
+void initialiser_grille(int lignes, int colonnes, char grille[16][16]) {
     for (int i = 0; i < lignes; i++) {
         for (int j = 0; j < colonnes; j++) {
             grille[i][j] = ' ';
@@ -64,8 +64,9 @@ void affichage_grille(int lignes, int colonnes, char plateau[16][16]) {
             // Affichage de la lettre
             printf("%c ", plateau[i][j]);
         }
-        // Retour  à la fin de la ligne
+        // Retour à la fin ligne
         printf("\n");
     }
     printf("\n");
 }
+

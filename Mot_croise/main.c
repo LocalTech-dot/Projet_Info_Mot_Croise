@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "header.h"
-#include "plateau.c"
+#include "grille.h"
 
 int main() {
     srand(time(NULL));
@@ -11,8 +11,7 @@ int main() {
         etat_jeux = affichage_menu();
     }while (etat_jeux == MENU);
 
-
-     affichage_grille();
+    affichage_grille();
 
 
 

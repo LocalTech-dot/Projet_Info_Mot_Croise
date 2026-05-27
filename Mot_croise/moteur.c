@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "header.h"
-#include "plateau.h"
+#include "grille.h"
 #include "dictionnaire.h"
 
 etat affichage_menu() {
@@ -73,7 +73,7 @@ size ask_size() {
     return dim;
 }
 
-void affichage_grille() {
+/*void affichage_grille() {
     char resp;
     char plateau_de_jeu[16][16];
 
@@ -96,5 +96,5 @@ void affichage_grille() {
     initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
 
-}
+}/*
 
