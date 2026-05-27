@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <time.h>
 #include "header.h"
-#include "grille.h"
+#include "plateau.c"
 
 int main() {
     srand(time(NULL));
@@ -13,6 +13,7 @@ int main() {
 
 
      affichage_grille();
+
 
 
     return 0;

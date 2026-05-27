@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "header.h"
-#include "grille.h"
+#include "plateau.h"
 #include "dictionnaire.h"
 
 etat affichage_menu() {
