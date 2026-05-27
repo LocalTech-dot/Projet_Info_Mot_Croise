@@ -4,3 +4,5 @@ Il faut finir le placement des mots dans la grille, la fonction de recherches de
 
 
 la fonction qui crée le tableau à été finalise, l'appelation grille à été remplacée par tableau, ça me semblait plus logique.
+
+enft j'ai remis grille
