@@ -11,7 +11,7 @@ int main() {
         etat_jeux = affichage_menu();
     }while (etat_jeux == MENU);
 
-    affichage_grille();
+
 
 
 

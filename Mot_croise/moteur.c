@@ -73,7 +73,7 @@ size ask_size() {
     return dim;
 }
 
-/*void affichage_grille() {
+/*void config_grille() {
     char resp;
     char plateau_de_jeu[16][16];
 
@@ -96,5 +96,5 @@ size ask_size() {
     initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
 
-}/*
-
+}
+*/
