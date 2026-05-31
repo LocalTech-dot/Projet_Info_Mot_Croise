@@ -1,8 +1,7 @@
 Avancement du projet :
 
-Il faut finir le placement des mots dans la grille, la fonction de recherches de mots dans le dictionnaire est finie, il reste donc à placer les mots dans la grille pour finir la partie initialisation du plateau et pour pouvoir après commencer à travailler sur la fonction qui va rechercher les mots tapé par l'utilisateur dans la grille.
+Le placement des mots dans la grille est finis, il reste à coder le déroulement d'une partie, la fonction config grille gère pas mal de truc comme le fais d'intiialiser la grille etc on verra si on
+transfère une partie dans le main mais c'est complexe car certaines fonctions utilises des variables locales, sinon la grille affiche bien les mots, on remarque quand même que si on ne choisi pas une
+grille de taille supérieur à 14 on à peu de mots qui sont tiré. 
 
-
-la fonction qui crée le tableau à été finalise, l'appelation grille à été remplacée par tableau, ça me semblait plus logique.
-
-enft j'ai remis grille
+Il faut maintenant créer la partie donc une conditon de victoire, un scanf pour que l'utilisateur cherche les mots etc. Je conseil de ne pas remettre le bruitage, ca devient long pour debeuguer de jouer au mots mélé tout le temps.
