@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <string.h>
 #include <stdio.h>
 #include "header.h"
 #include "grille.h"
@@ -73,10 +74,9 @@ size ask_size() {
     return dim;
 }
 
-/*void config_grille() {
+void config_grille(liste_mots *dico) {
     char resp;
     char plateau_de_jeu[16][16];
-
     size dim;
 
     do {
@@ -93,8 +93,92 @@ size ask_size() {
 
     } while (resp == 'N' || resp == 'n');
 
+    recherche(dim.nb_lignes, dim.nb_colonnes, dico);//on tire la liste de mots au hasard
     initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
+    int N;
+    if (dim.nb_colonnes > dim.nb_lignes) {
+        N = dim.nb_lignes;
+        } else {
+        N = dim.nb_colonnes;
+    }//cette boucle calcule la taille minimale de la grille
+
+    int taille_actuelle = N;
+
+    while (taille_actuelle >= 3) {//la consigne précise de ne pas placer des mots plus petits que 3
+
+        char* mot_possible = NULL;
+        int indices_candidats[MAX_MOTS];
+        int nb_candidats = 0;
+
+            for (int j = 0; j < dico->nb_mots; j++) {//on liste tous les mots de la taille actuelle et on range leurs positons dans indice_candidats
+            if (strlen(dico->mots_choisie[j]) == taille_actuelle) {
+                indices_candidats[nb_candidats] = j;
+                nb_candidats++;
+                }
+            }
+                if (nb_candidats > 0) {//parmis les mots d'une même taille on en choisis un au hasard
+                int tirage = rand() % nb_candidats;
+                int index_gagnant = indices_candidats[tirage];
+                mot_possible = dico->mots_choisie[index_gagnant];
+                }
+            if (mot_possible == NULL) {//si pas de mots de la taille_actuelle on passe à l'itération suivante
+            taille_actuelle--;
+            continue;
+            }
+
+        int x_depart = rand() % dim.nb_colonnes;
+        int y_depart = rand() % dim.nb_lignes;
+        int dx, dy;
+        dx = rand() % 2;//on génére les positions possibles, on pourrais aller jusqu'a trois mais incluerait les mots à l'envers je trouvais ca trop dure
+        dy = rand() % 2;
+
+        if (dx == 0 && dy == 0) {
+            dx = 1;
+        }
+
+        int est_valide = verifier_placement(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy, dim.nb_lignes, dim.nb_colonnes);//test de placement
+
+        printf("Tentative de placement : %s | Valide : %d\n", mot_possible, est_valide);
+
+
+            if (est_valide) {
+                placer_mot(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy);
+
+                    for (int j = 0; j < dico->nb_mots; j++) {//si le mot choisi est placé, on rajoute le caractère de fin de ligne pour ne plus avoir à le retirer
+                        if (dico->mots_choisie[j] == mot_possible) {
+                            dico->mots_choisie[j][0] = '\0';
+                        break;
+                        }
+                    }
+            }
+        else{//deuxième test : voir consigne
+            dx = rand() % 2;
+            dy = rand() % 2;
+                if (dx == 0 && dy == 0) {
+                    dx = 1;
+                }
+                    int est_valide_2 = verifier_placement(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy, dim.nb_lignes, dim.nb_colonnes);
+                            if (est_valide_2) {
+                                placer_mot(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy);
+                                    for (int j = 0; j < dico->nb_mots; j++) {
+                                        if (dico->mots_choisie[j] == mot_possible) {
+                                            dico->mots_choisie[j][0] = '\0';
+                                        break;
+                                        }
+                                    }
+                            }
+                            else {
+                                taille_actuelle--;
+                            }
+        }
+    }
+    //tant que le jeux n'est pas fini on met en pause le bruitage sinon c'est la street pour voir si il y a bien des mots dans le tableau
+    /*bruitage_grille( dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);*/
+
+
+    affichage_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
 }
-*/
+
+

@@ -22,7 +22,7 @@ typedef struct {
 etat affichage_menu();
 etat quitter_menu();
 size ask_size();
-//void affichage_grille();
+void config_grille(liste_mots *dico);
 
 
 

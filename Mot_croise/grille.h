@@ -7,7 +7,7 @@
 
 #include <stdbool.h>
 
-void initialiser_plateau(int lignes, int colonnes, char grille[16][16]);
+void initialiser_grille(int lignes, int colonnes, char grille[16][16]);
 
 bool verifier_placement(char plateau[16][16], char* mot, int x_depart, int y_depart, int dx, int dy, int nb_lignes, int nb_colonnes);
 
