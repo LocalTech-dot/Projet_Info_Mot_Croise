@@ -27,7 +27,7 @@ typedef struct {
 etat affichage_menu();
 etat quitter_menu();
 size ask_size();
-void config_grille(liste_mots *dico);
+void config_grille(size dim, liste_mots *dico, char plateau_de_jeu[16][16]);
 diagonale ask_diag();
 
 

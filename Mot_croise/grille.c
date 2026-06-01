@@ -61,7 +61,7 @@ void affichage_grille(int lignes, int colonnes, char plateau[16][16]) {
 
     for (int i = 0; i < lignes; i++) {
         for (int j = 0; j < colonnes; j++) {
-            // Affichage de la lettre
+
             printf("%c ", plateau[i][j]);
         }
         // Retour à la fin ligne

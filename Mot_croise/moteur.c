@@ -94,25 +94,7 @@ size ask_size() {
     return dim;
 }
 
-void config_grille(liste_mots *dico) {
-    char resp;
-    char plateau_de_jeu[16][16];
-    size dim;
-
-    do {
-        dim = ask_size();
-
-        do {
-            printf("Vous avez choisi de jouer dans une grille de taille %d*%d. Voulez-vous continuer ? Y/N : ", dim.nb_lignes, dim.nb_colonnes);
-            scanf(" %c", &resp);
-
-            if (resp != 'Y' && resp != 'y' && resp != 'N' && resp != 'n') {
-                printf("Erreur de saisie. Veuillez repondre par Y ou N.\n");
-            }
-        } while (resp != 'Y' && resp != 'y' && resp != 'N' && resp != 'n');
-
-    } while (resp == 'N' || resp == 'n');
-
+void config_grille(size dim, liste_mots *dico, char plateau_de_jeu[16][16]) {
     recherche(dim.nb_lignes, dim.nb_colonnes, dico);//on tire la liste de mots au hasard
     initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
@@ -212,7 +194,7 @@ void config_grille(liste_mots *dico) {
         }
     }
     //tant que le jeux n'est pas fini on met en pause le bruitage sinon c'est la street pour voir si il y a bien des mots dans le tableau
-    /*bruitage_grille( dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);*/
+    //bruitage_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
 
     affichage_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);

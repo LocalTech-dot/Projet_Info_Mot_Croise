@@ -5,6 +5,7 @@
 #include <string.h>
 
 #include "grille.h"
+#include "jeux.h"
 
 int main() {
     srand(time(NULL));
@@ -18,7 +19,7 @@ int main() {
         if (etat_jeux == PARTIE) {
             printf("\n--- INITIALISATION DU MOTEUR MATRICIEL ---\n");
 
-            config_grille(&mon_dictionnaire);
+            jeux();
         }
 
     } while (etat_jeux == MENU);
