@@ -7,7 +7,7 @@
 #include <time.h>
 
 int ask_time(){
-    int resp
+    int resp;
     do {
         printf("En combien de minutes souhaiter vous tenter votre chance ?\n");
         printf("----------------------------------------------------------\n");
@@ -22,8 +22,10 @@ int ask_time(){
 
 void jeux() {
     int score = 0;
+    int trouve;
     int masque[16][16];
     char resp;
+    char mot_saisi[50];
     char grille[16][16];
     size dim;
     liste_mots mon_dictionnaire;
@@ -43,9 +45,34 @@ void jeux() {
 
     for (int i = 0; i < dim.nb_lignes; i++) {
         for (int j = 0; j < dim.nb_colonnes; j++) {
-            masque[i][j] = '0';
+            masque[i][j] = 0;
         }
     }
-
+    int minutes = ask_time();
+    time_t temps_debut = time(NULL);
+    time_t temps_fin = temps_debut + (minutes * 60);
     config_grille(dim, &mon_dictionnaire, grille);
+
+    while (time(NULL) < temps_fin) {
+        trouve = 0;
+        affichage_grille(dim.nb_lignes, dim.nb_colonnes, grille, masque);
+        printf("\n");
+        printf("Veuillez saisir le mot trouvé :...\n");
+        scanf("%s", mot_saisi);
+        if (verifier_mots(dim.nb_lignes, dim.nb_colonnes, grille, masque, mot_saisi)) {
+            for (int i = 0; i < mon_dictionnaire.nb_mots; i++) {
+                if (strcmp(mon_dictionnaire.mots_choisie[i],mot_saisi) == 0){
+                    trouve = 1;
+                    mon_dictionnaire.mots_choisie[i][0] = '\0';
+                    break;
+                }
+
+            }
+            if (trouve) {
+                score++;
+            }else {
+                score += 5;
+            }
+        }
+    }
 }

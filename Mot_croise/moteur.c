@@ -195,10 +195,46 @@ void config_grille(size dim, liste_mots *dico, char plateau_de_jeu[16][16]) {
     }
     //tant que le jeux n'est pas fini on met en pause le bruitage sinon c'est la street pour voir si il y a bien des mots dans le tableau
     //bruitage_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
+}
 
+int verifier_mots(int lignes, int colonnes, char plateau_de_jeu[16][16], int masque[16][16], char mot_saisi[50]) {
+int longueur = strlen(mot_saisi);
 
-    affichage_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
+    for (int i = 0; i < lignes; i++) {
+        for (int j = 0; j < colonnes; j++) {
 
+            if (plateau_de_jeu[i][j] == mot_saisi[0]) {
+                for (int dx = -1; dx <= 1; dx++) {
+                    for (int dy = -1; dy <= 1; dy++) {
+                        if (dx == 0 && dy == 0) continue;
+                        int k;
+                        for (k = 1; k < longueur; k++) {
+
+                            int x_k = i + k * dx;
+                            int y_k = j + k * dy;
+
+                            if (x_k < 0 || x_k >= lignes || y_k < 0 || y_k >= colonnes) {
+                                break;
+                            }
+                            if (plateau_de_jeu[x_k][y_k] != mot_saisi[k]) {
+                                break;
+                            }
+                        }
+                        if (k == longueur) {
+                            for (int m = 0; m < longueur; m++) {
+                                int x_m = i + m * dx;
+                                int y_m = j + m * dy;
+                                masque[x_m][y_m] = 1;
+                            }
+
+                            return TRUE;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return FALSE;
 }
 
 

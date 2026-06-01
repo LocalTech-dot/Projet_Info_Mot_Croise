@@ -16,7 +16,7 @@ void placer_mot(char plateau[16][16], char* mot, int x_depart, int y_depart, int
 
 void bruitage_grille(int lignes, int colonnes, char plateau[16][16]);
 
-void affichage_grille(int lignes, int colonnes, char plateau[16][16]);
+void affichage_grille(int lignes, int colonnes, char plateau[16][16], int masque[16][16]);
 
 #endif
 
