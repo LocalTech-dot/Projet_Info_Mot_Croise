@@ -9,6 +9,11 @@ typedef enum {
     SCORE
 } etat;
 
+typedef enum {
+    FALSE,
+    TRUE
+} diagonale;
+
 typedef struct {
     int nb_lignes;
     int nb_colonnes;
@@ -23,6 +28,7 @@ etat affichage_menu();
 etat quitter_menu();
 size ask_size();
 void config_grille(liste_mots *dico);
+diagonale ask_diag();
 
 
 

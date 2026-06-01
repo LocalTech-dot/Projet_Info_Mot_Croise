@@ -54,6 +54,20 @@ etat quitter_menu() {
     return MENU;
 }
 
+diagonale ask_diag() {
+    char rep_diag;
+    do {
+        printf("Voulez-vous prendre en compte les digonales?");
+        scanf(" %c");
+        if (rep_diag == 'Y'||rep_diag=='y') {
+            return TRUE;
+        }
+        if (rep_diag == 'N'||rep_diag=='n') {
+            return FALSE;
+        }
+    } while (rep_diag != 'Y' && rep_diag != 'y' && rep_diag != 'n' && rep_diag != 'N');
+}
+
 size ask_size() {
     size dim;
 
@@ -96,6 +110,8 @@ void config_grille(liste_mots *dico) {
     recherche(dim.nb_lignes, dim.nb_colonnes, dico);//on tire la liste de mots au hasard
     initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
+    printf("il y a %d mots \n", dico->nb_mots);
+
     int N;
     if (dim.nb_colonnes > dim.nb_lignes) {
         N = dim.nb_lignes;
@@ -130,8 +146,12 @@ void config_grille(liste_mots *dico) {
         int x_depart = rand() % dim.nb_colonnes;
         int y_depart = rand() % dim.nb_lignes;
         int dx, dy;
+        bool diagonale = ask_diag();
         dx = rand() % 2;//on génére les positions possibles, on pourrais aller jusqu'a trois mais incluerait les mots à l'envers je trouvais ca trop dure
         dy = rand() % 2;
+        if (!diagonale) {
+            
+        }
 
         if (dx == 0 && dy == 0) {
             dx = 1;
