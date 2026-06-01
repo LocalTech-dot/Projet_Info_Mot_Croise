@@ -1,0 +1,6 @@
+#ifndef MOT_CROISE_JEUX_H
+#define MOT_CROISE_JEUX_H
+
+
+
+#endif //MOT_CROISE_JEUX_H

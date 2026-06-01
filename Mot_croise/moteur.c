@@ -57,15 +57,21 @@ etat quitter_menu() {
 diagonale ask_diag() {
     char rep_diag;
     do {
-        printf("Voulez-vous prendre en compte les digonales?");
-        scanf(" %c");
-        if (rep_diag == 'Y'||rep_diag=='y') {
+        printf("Voulez-vous prendre en compte les diagonales ? (Y/N) : ");
+        scanf(" %c", &rep_diag);
+
+        if (rep_diag == 'Y' || rep_diag == 'y') {
             return TRUE;
         }
-        if (rep_diag == 'N'||rep_diag=='n') {
+        else if (rep_diag == 'N' || rep_diag == 'n') {
             return FALSE;
         }
-    } while (rep_diag != 'Y' && rep_diag != 'y' && rep_diag != 'n' && rep_diag != 'N');
+        else {
+            printf("Erreur de saisie. Veuillez répondre par Y ou N.\n");
+        }
+    } while (rep_diag != 'Y' && rep_diag != 'y' && rep_diag != 'N' && rep_diag != 'n');
+
+    return FALSE;
 }
 
 size ask_size() {
@@ -110,7 +116,7 @@ void config_grille(liste_mots *dico) {
     recherche(dim.nb_lignes, dim.nb_colonnes, dico);//on tire la liste de mots au hasard
     initialiser_grille(dim.nb_lignes, dim.nb_colonnes, plateau_de_jeu);
 
-    printf("il y a %d mots \n", dico->nb_mots);
+    /*printf("il y a %d mots \n", dico->nb_mots);*/
 
     int N;
     if (dim.nb_colonnes > dim.nb_lignes) {
@@ -120,6 +126,9 @@ void config_grille(liste_mots *dico) {
     }//cette boucle calcule la taille minimale de la grille
 
     int taille_actuelle = N;
+
+    bool diagonale = ask_diag();
+
 
     while (taille_actuelle >= 3) {//la consigne précise de ne pas placer des mots plus petits que 3
 
@@ -146,16 +155,19 @@ void config_grille(liste_mots *dico) {
         int x_depart = rand() % dim.nb_colonnes;
         int y_depart = rand() % dim.nb_lignes;
         int dx, dy;
-        bool diagonale = ask_diag();
-        dx = rand() % 2;//on génére les positions possibles, on pourrais aller jusqu'a trois mais incluerait les mots à l'envers je trouvais ca trop dure
-        dy = rand() % 2;
-        if (!diagonale) {
-            
-        }
+        do {
+            dx = (rand() % 3) -1;
+            dy = (rand() % 3) -1;
+            if (!diagonale) {
+                if (rand()%2 == 0) {
+                    dx = 0;
+                }else {
+                    dy = 0;
+                }
+            }
+        }while (dx == 0 && dy == 0);
 
-        if (dx == 0 && dy == 0) {
-            dx = 1;
-        }
+
 
         int est_valide = verifier_placement(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy, dim.nb_lignes, dim.nb_colonnes);//test de placement
 
@@ -173,11 +185,17 @@ void config_grille(liste_mots *dico) {
                     }
             }
         else{//deuxième test : voir consigne
-            dx = rand() % 2;
-            dy = rand() % 2;
-                if (dx == 0 && dy == 0) {
-                    dx = 1;
+            do {
+                dx = (rand() % 3) -1;
+                dy = (rand() % 3) -1;
+                if (!diagonale) {
+                    if (rand()%2 == 0) {
+                        dx = 0;
+                    }else {
+                        dy = 0;
+                    }
                 }
+            }while (dx == 0 && dy == 0);
                     int est_valide_2 = verifier_placement(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy, dim.nb_lignes, dim.nb_colonnes);
                             if (est_valide_2) {
                                 placer_mot(plateau_de_jeu, mot_possible, x_depart, y_depart, dx, dy);

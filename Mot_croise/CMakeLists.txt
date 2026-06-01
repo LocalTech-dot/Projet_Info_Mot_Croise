@@ -9,4 +9,6 @@ add_executable(Mot_croise main.c
         grille.h
         grille.c
         dictionnaire.c
-        dictionnaire.h)
+        dictionnaire.h
+        jeux.c
+        jeux.h)
