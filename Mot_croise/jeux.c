@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
+#include <ctype.h>
 #include "grille.h"
 #include "header.h"
 #include "jeux.h"
-#include <time.h>
+
 
 int ask_time(){
     int resp;
@@ -13,10 +15,10 @@ int ask_time(){
         printf("----------------------------------------------------------\n");
         printf("----------1------------------2----------------3-----------\n");
         scanf("%d", &resp);
-        if (resp != '1' && resp != '2' && resp != '3') {
+        if (resp != 1 && resp != 2 && resp != 3) {
             printf("Erreur de saisie. Veuillez repondre par 1 2 ou 3\n");
         }
-    } while (resp != '1' && resp != '2' && resp != '3');
+    } while (resp != 1 && resp != 2 && resp != 3);
     return resp;
 }
 
@@ -54,25 +56,74 @@ void jeux() {
     config_grille(dim, &mon_dictionnaire, grille);
 
     while (time(NULL) < temps_fin) {
-        trouve = 0;
         affichage_grille(dim.nb_lignes, dim.nb_colonnes, grille, masque);
-        printf("\n");
-        printf("Veuillez saisir le mot trouvé :...\n");
+        printf("\nTemps restant : %ld secondes | Score : %d\n", temps_fin - time(NULL), score);
+        printf("Veuillez saisir le mot trouve : ");
         scanf("%s", mot_saisi);
-        if (verifier_mots(dim.nb_lignes, dim.nb_colonnes, grille, masque, mot_saisi)) {
-            for (int i = 0; i < mon_dictionnaire.nb_mots; i++) {
-                if (strcmp(mon_dictionnaire.mots_choisie[i],mot_saisi) == 0){
-                    trouve = 1;
-                    mon_dictionnaire.mots_choisie[i][0] = '\0';
-                    break;
-                }
+        if (time(NULL) >= temps_fin) {
+            printf("\nLe temps est ecoule, saisie invalidee !\n");
+            break;
+        }
+        for (int k = 0; mot_saisi[k] != '\0'; k++) {
+            mot_saisi[k] = toupper(mot_saisi[k]);
+        }
+        int mot_valide = 0;
+        int points_a_gagner = 0;
+        for (int i = 0; i < mon_dictionnaire.nb_mots; i++) {
 
+            // On crée une copie propre du mot généré pour le comparer
+            char mot_propre[50];
+            int idx = 0;
+            for (int k = 0; mon_dictionnaire.mots_choisie[i][k] != '\0'; k++) {
+                // On ignore les retours à la ligne invisibles (\n et \r)
+                if (mon_dictionnaire.mots_choisie[i][k] != '\n' && mon_dictionnaire.mots_choisie[i][k] != '\r') {
+                    // On force en majuscule
+                    mot_propre[idx] = toupper(mon_dictionnaire.mots_choisie[i][k]);
+                    idx++;
+                }
             }
-            if (trouve) {
-                score++;
-            }else {
-                score += 5;
+            mot_propre[idx] = '\0';
+
+            printf("DEBUG - Memoire: [%s] | Saisi: [%s]\n", mot_propre, mot_saisi);
+            if (strcmp(mot_propre, mot_saisi) == 0) {
+                mot_valide = 1;
+                points_a_gagner = 1;
+                mon_dictionnaire.mots_choisie[i][0] = '\0'; // On raye le mot
+                break;
             }
         }
+        if (mot_valide == 0) {
+            FILE *fichier_dico = fopen("dico.txt", "r");
+            if (fichier_dico != NULL) {
+                char mot_lu[50];
+                while (fscanf(fichier_dico, "%49s", mot_lu) == 1) {
+                    // Majuscules pour comparer proprement
+                    for (int k = 0; mot_lu[k] != '\0'; k++) {
+                        mot_lu[k] = toupper(mot_lu[k]);
+                    }
+                    if (strcmp(mot_lu, mot_saisi) == 0) {
+                        mot_valide = 1;
+                        points_a_gagner = 5;
+                        break;
+                    }
+                }
+                fclose(fichier_dico);
+            } else {
+                printf("\nErreur systeme : Impossible d'ouvrir dico.txt\n");
+            }
+        }
+        if (mot_valide == 1) {
+            if (verifier_mots(dim.nb_lignes, dim.nb_colonnes, grille, masque, mot_saisi)) {
+                score += points_a_gagner;
+                printf("\nMot valide et trouve ! +%d points.\n", points_a_gagner);
+            } else {
+                printf("\nCe mot existe, mais il n'est pas dans la grille !\n");
+            }
+        } else {
+            printf("\nCe mot n'existe pas ou a deja ete trouve.\n");
+        }
     }
+
+    printf("\n--- FIN DE LA PARTIE ---\n");
+    printf("Le temps est ecoule, votre score est de %d\n", score);
 }

@@ -62,7 +62,7 @@ void affichage_grille(int lignes, int colonnes, char plateau[16][16], int masque
     for (int i = 0; i < lignes; i++) {
         for (int j = 0; j < colonnes; j++) {
             if (masque[i][j] == 1) {
-                printf("\033[32m%c\033[0m ", plateau[i][j]);
+                printf("-");
             }
             else {
                 printf("%c ", plateau[i][j]);
