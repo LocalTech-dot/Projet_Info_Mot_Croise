@@ -12,7 +12,6 @@ int max_mots_partie(int lignes, int colonnes) {
     }
     return max_mots;
 }
-
 int calc_taille_mots_max(int lignes, int colonnes) {
     if (lignes > colonnes) {
         return lignes;
@@ -20,7 +19,6 @@ int calc_taille_mots_max(int lignes, int colonnes) {
         return colonnes;
     }
 }
-
 void recherche(int lignes, int colonnes, liste_mots *ma_liste) {
     int max_mots = max_mots_partie(lignes, colonnes);// ici on calcule le nombres de mots maximum que l'on pourra stocker dans la grille
     int taille_mots_max = calc_taille_mots_max(lignes, colonnes);// pareil mais avec la taille des mots pou ne pas tirer au hasard un mots trop grand pour la grille

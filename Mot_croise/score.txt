@@ -1,0 +1,6 @@
+Max 16 16 1 47 1
+Lucien 10 10 1 18 1
+Lucien 10 10 1 24 0
+Lucien 10 10 1 28 0
+Lucien 16 16 1 16 1
+Fran‡ois 16 16 1 22 1

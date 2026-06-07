@@ -2,7 +2,6 @@
 #define MOT_CROISE_JEUX_H
 
 int ask_time();
-void jeux();
-
+etat jeux();
 
 #endif //MOT_CROISE_JEUX_H

@@ -6,6 +6,8 @@
 #include "grille.h"
 #include "header.h"
 #include "jeux.h"
+#include "score.h"
+#include <math.h>
 
 
 int ask_time(){
@@ -21,14 +23,14 @@ int ask_time(){
     } while (resp != 1 && resp != 2 && resp != 3);
     return resp;
 }
-
-void jeux() {
+etat jeux() {
     int score = 0;
     int trouve;
     int masque[16][16];
     char resp;
     char mot_saisi[50];
     char grille[16][16];
+    char name [50];
     size dim;
     liste_mots mon_dictionnaire;
 
@@ -53,11 +55,11 @@ void jeux() {
     int minutes = ask_time();
     time_t temps_debut = time(NULL);
     time_t temps_fin = temps_debut + (minutes * 60);
-    config_grille(dim, &mon_dictionnaire, grille);
+    bool diagonale = config_grille(dim, &mon_dictionnaire, grille);
 
     while (time(NULL) < temps_fin) {
         affichage_grille(dim.nb_lignes, dim.nb_colonnes, grille, masque);
-        printf("\nTemps restant : %ld secondes | Score : %d\n", temps_fin - time(NULL), score);
+        printf("\nTemps restant : %ld secondes ", temps_fin - time(NULL));
         printf("Veuillez saisir le mot trouve : ");
         scanf("%s", mot_saisi);
         if (time(NULL) >= temps_fin) {
@@ -71,7 +73,7 @@ void jeux() {
         int points_a_gagner = 0;
         for (int i = 0; i < mon_dictionnaire.nb_mots; i++) {
 
-            // On crée une copie propre du mot généré pour le comparer
+            // On crée une copie du mot généré pour le comparer
             char mot_propre[50];
             int idx = 0;
             for (int k = 0; mon_dictionnaire.mots_choisie[i][k] != '\0'; k++) {
@@ -84,11 +86,9 @@ void jeux() {
             }
             mot_propre[idx] = '\0';
 
-            printf("DEBUG - Memoire: [%s] | Saisi: [%s]\n", mot_propre, mot_saisi);
             if (strcmp(mot_propre, mot_saisi) == 0) {
                 mot_valide = 1;
-                points_a_gagner = 1;
-                mon_dictionnaire.mots_choisie[i][0] = '\0'; // On raye le mot
+                mon_dictionnaire.mots_choisie[i][0] = '\0';
                 break;
             }
         }
@@ -97,13 +97,13 @@ void jeux() {
             if (fichier_dico != NULL) {
                 char mot_lu[50];
                 while (fscanf(fichier_dico, "%49s", mot_lu) == 1) {
-                    // Majuscules pour comparer proprement
+                    // On met en majuscule  pour comparer
                     for (int k = 0; mot_lu[k] != '\0'; k++) {
                         mot_lu[k] = toupper(mot_lu[k]);
                     }
                     if (strcmp(mot_lu, mot_saisi) == 0) {
                         mot_valide = 1;
-                        points_a_gagner = 5;
+
                         break;
                     }
                 }
@@ -114,8 +114,11 @@ void jeux() {
         }
         if (mot_valide == 1) {
             if (verifier_mots(dim.nb_lignes, dim.nb_colonnes, grille, masque, mot_saisi)) {
-                score += points_a_gagner;
-                printf("\nMot valide et trouve ! +%d points.\n", points_a_gagner);
+                int longueur = strlen(mot_saisi);
+                float points_gagnes = pow((float)longueur, 4.0/3.0);
+                score += (int)points_gagnes;
+
+                printf("\nMot valide et trouve ! \n");
             } else {
                 printf("\nCe mot existe, mais il n'est pas dans la grille !\n");
             }
@@ -125,5 +128,11 @@ void jeux() {
     }
 
     printf("\n--- FIN DE LA PARTIE ---\n");
-    printf("Le temps est ecoule, votre score est de %d\n", score);
+    printf("Le temps est ecoule\n");
+
+    printf("Veuillez saisir votre nom pour sauvegarder la partie");
+    scanf(" %s", name);
+
+    save(name, dim.nb_lignes,dim.nb_colonnes,minutes, score, diagonale);
+    return MENU;
 }

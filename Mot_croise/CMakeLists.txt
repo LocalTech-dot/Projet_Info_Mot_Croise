@@ -11,4 +11,6 @@ add_executable(Mot_croise main.c
         dictionnaire.c
         dictionnaire.h
         jeux.c
-        jeux.h)
+        jeux.h
+        score.c
+        score.h)

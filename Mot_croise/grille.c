@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include "grille.h"
-#include "header.h"
 #include <stdbool.h>
 
 void initialiser_grille(int lignes, int colonnes, char grille[16][16]) {
@@ -12,7 +11,6 @@ void initialiser_grille(int lignes, int colonnes, char grille[16][16]) {
         }
     }
 }
-
 bool verifier_placement(char plateau[16][16], char* mot, int x_depart, int y_depart, int dx, int dy, int nb_lignes, int nb_colonnes) {
     int longueur = strlen(mot);
 
@@ -32,7 +30,6 @@ bool verifier_placement(char plateau[16][16], char* mot, int x_depart, int y_dep
     }
     return true;
 }
-
 void placer_mot(char plateau[16][16], char* mot, int x_depart, int y_depart, int dx, int dy) {
     int longueur = strlen(mot);
 
@@ -44,7 +41,6 @@ void placer_mot(char plateau[16][16], char* mot, int x_depart, int y_depart, int
         plateau[pos_y][pos_x] = mot[i];  // meme boucle sauf qu'on place la lettre a dans la case
     }
 }
-
 void bruitage_grille(int lignes, int colonnes, char plateau[16][16]) {
     for (int i = 0; i < lignes; i++) {
         for (int j = 0; j < colonnes; j++) {
@@ -55,14 +51,13 @@ void bruitage_grille(int lignes, int colonnes, char plateau[16][16]) {
         }
     }
 }
-
 void affichage_grille(int lignes, int colonnes, char plateau[16][16], int masque[16][16]) {
     printf("\n");
 
     for (int i = 0; i < lignes; i++) {
         for (int j = 0; j < colonnes; j++) {
             if (masque[i][j] == 1) {
-                printf("-");
+                printf("- ");
             }
             else {
                 printf("%c ", plateau[i][j]);
